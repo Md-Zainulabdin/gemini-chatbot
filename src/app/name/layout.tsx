@@ -6,7 +6,7 @@ interface Props {
 
 const AuthLayout: React.FC<Props> = async ({ children }) => {
   return (
-    <div className="w-full h-[100vh] flex flex-col text-center justify-center items-center">
+    <div className="w-full h-[100vh] flex flex-col justify-center items-center">
       {children}
     </div>
   );

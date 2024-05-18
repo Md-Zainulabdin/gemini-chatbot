@@ -3,7 +3,7 @@ import React, { useRef, useState } from "react";
 import useStore from "@/store";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Image, Send } from "lucide-react";
+import { Image, Send, Trash } from "lucide-react";
 import Header from "@/components/Header";
 
 const Home = () => {
@@ -29,6 +29,18 @@ const Home = () => {
     }
   };
 
+  const handleSubmit = (event: React.FormEvent) => {
+    event.preventDefault();
+    if (prompt) {
+      console.log("Submitted prompt:", prompt);
+      setLoading(true);
+      // Your submit logic here
+      // Reset prompt after submission if necessary
+      setPrompt("");
+      setLoading(false);
+    }
+  };
+
   return (
     <>
       <div>
@@ -38,9 +50,38 @@ const Home = () => {
         <div>
           <h2>Hello {user?.name}</h2>
         </div>
+        {imageUrl && (
+          <div className="image-area w-full py-4">
+            <div className="relative border rounded-md w-[120px] h-[120px] p-2 overflow-hidden">
+              <span className="absolute top-1 right-1">
+                <Trash
+                  className="w-5 h-5 text-red-500 cursor-pointer"
+                  onClick={() => setImageUrl(null)}
+                />
+              </span>
+              <img
+                src={imageUrl || ""}
+                alt="image"
+                className="w-full h-full object-cover rounded-md"
+              />
+            </div>
+          </div>
+        )}
         <div className="input-area">
-          <form className="flex gap-2">
-            <Input type="text" placeholder="Enter a prompt here" />
+          <form className="flex gap-2" onSubmit={handleSubmit}>
+            <Input
+              type="text"
+              value={prompt}
+              onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                setPrompt(event.target.value);
+              }}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  handleSubmit(e);
+                }
+              }}
+              placeholder="Enter a prompt here"
+            />
             <Input
               type="file"
               ref={inputRef}
@@ -55,12 +96,15 @@ const Home = () => {
             >
               <Image className="w-4 h-4 text-muted-foreground" />
             </Button>
-            <Button type="submit" variant={"outline"} size={"icon"}>
+            <Button
+              disabled={loading || !prompt}
+              type="submit"
+              variant={"outline"}
+              size={"icon"}
+            >
               <Send className="w-4 h-4 text-muted-foreground" />
             </Button>
           </form>
-
-          {imageUrl && <img src={imageUrl} alt="Selected" />}
         </div>
       </div>
     </>

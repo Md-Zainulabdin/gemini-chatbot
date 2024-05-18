@@ -69,7 +69,12 @@ const NamePage = () => {
       </div>
       <Card className="w-full max-w-[420px] shadow-md">
         <CardHeader>
-          <CardTitle className="text-2xl">Welcome to Gemini Bot</CardTitle>
+          <CardTitle className="text-2xl text-center">
+            Welcome to{" "}
+            <span className="font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-fuchsia-200">
+              Gemini Bot
+            </span>
+          </CardTitle>
         </CardHeader>
         <CardContent className="grid">
           <Form {...form}>
