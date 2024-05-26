@@ -8,7 +8,7 @@ type State = {
 };
 
 const useStore = create<State>((set) => ({
-  name: "John Doe",
+  name: "",
   setName: (name) => set((state) => ({ name })),
   removeName: () => set((state) => ({ name: "" })),
 }));

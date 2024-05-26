@@ -8,7 +8,7 @@ interface Props {
   children: React.ReactNode;
 }
 
-const AuthLayout: React.FC<Props> = async ({ children }) => {
+const AuthLayout: React.FC<Props> = ({ children }) => {
   const user = useStore((state) => state);
   const router = useRouter();
 

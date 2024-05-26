@@ -3,6 +3,7 @@ import { Bot } from "lucide-react";
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Basic from "@/components/basic/page";
+import Pro from "@/components/pro/example";
 
 const Home = () => {
   return (
@@ -20,7 +21,9 @@ const Home = () => {
             <TabsContent value="basic">
               <Basic />
             </TabsContent>
-            <TabsContent value="pro">Change your password here.</TabsContent>
+            <TabsContent value="pro">
+              <Pro />
+            </TabsContent>
           </Tabs>
         </div>
       </div>
